@@ -137,7 +137,7 @@ woff: otf ttf
 
 	mkdir -p woff
 	rm -f woff/*
-	mv otf/*.woff woff
+	mv ./*.woff woff
 	rm -f woff/*WinChrom* woff/*WinIE6* woff/*Greek*
 
 css: woff
