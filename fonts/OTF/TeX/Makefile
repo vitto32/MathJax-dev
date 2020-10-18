@@ -117,7 +117,7 @@ eot: ttf
 
 	rm -f eot/*WinChrome* eot/*Greek*
 
-svg: ttf
+svg: # ttf
 	mkdir -p svg
 	rm -f svg/*
 
@@ -129,7 +129,20 @@ svg: ttf
 
 	rm -f svg/*WinIE6* svg/*Greek*
 
-woff: otf ttf
+otf2ttf:
+	mkdir -p ttf
+	rm -f ttf/*
+
+	@for file in `ls otf/*.otf | $(SED) 's|otf/\(.*\)\.otf|\1|'`; do \
+		echo "Generating $$file.ttf..."; \
+		$(FONTFORGE) -lang=ff -c "Open('otf/$$file.otf'); Generate('ttf/$$file.ttf');"; \
+		done
+
+verdanaCopy: #test
+	$(FONTFORGE) -lang=ff -script verdana/verdana.ff
+	@echo "verdana.ff end"
+
+woff: # ttf
 	@for file in `ls otf/*.otf | $(SED) 's|otf/\(.*\)\.otf|\1|'`; do \
 		echo "Generating $$file.woff..."; \
 		$(SFNT2WOFF) otf/$$file.otf; \
@@ -170,10 +183,14 @@ install:
 	rm -f $(MATHJAXDIR)/fonts/HTML-CSS/TeX/woff/*.*
         #rm -f $(MATHJAXDIR)/fonts/HTML-CSS/TeX/css/*.*
 	cp `ls otf/*.otf | $(GREP) -v 'Greek'` $(MATHJAXDIR)/fonts/HTML-CSS/TeX/otf
-	cp eot/*.eot $(MATHJAXDIR)/fonts/HTML-CSS/TeX/eot
+	# cp eot/*.eot $(MATHJAXDIR)/fonts/HTML-CSS/TeX/eot
 	cp svg/*.svg $(MATHJAXDIR)/fonts/HTML-CSS/TeX/svg
 	cp woff/*.woff $(MATHJAXDIR)/fonts/HTML-CSS/TeX/woff
         #cp css/*.css $(MATHJAXDIR)/fonts/HTML-CSS/TeX/css
+
+cleanSVG:
+	rm -f $(MFTRACE_MODIFIED) lib/blacker.mf
+	rm -rf svg ttf woff
 
 clean:
 	rm -f $(MFTRACE_MODIFIED) lib/blacker.mf

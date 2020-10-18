@@ -1,3 +1,14 @@
+Vittorio@Libre
+- creare custom.cfg (vedi sotto)
+- installare MacTeX e FontForge (command line tools)
+- verificare che nel sistema siano installati i comandi usati in custom.cfg (fino a ttx, gli altri non servono)
+- verificare siano giuste le cartelle FONTDIR e MATHJAXDIR
+- installare npm i uglify-js -g
+- lanciare 'make -C fonts ttf'
+- lanciare 'make -C fonts small'
+- (opzionale) lanciare 'make -C fonts pack'
+
+--------------------------------------------------------------------------------
 fredw: This must be updated now that MathJax-dev is configurable so that people
 feel more welcome to use it. Quick hints:
 
