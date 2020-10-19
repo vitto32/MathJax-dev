@@ -21,7 +21,9 @@ include ../custom.cfg
 
 all: otf afm svg img ams tables
 
-small:
+small: smallK pack
+
+smallK:
 	$(MAKE) -C OTF/TeX cleanSVG
 	$(MAKE) -C SVG/TeX clean
 	$(MAKE) -C AFM/TeX clean

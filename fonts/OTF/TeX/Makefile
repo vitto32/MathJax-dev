@@ -138,8 +138,14 @@ otf2ttf:
 		$(FONTFORGE) -lang=ff -c "Open('otf/$$file.otf'); Generate('ttf/$$file.ttf');"; \
 		done
 
-verdanaCopy: #test
-	$(FONTFORGE) -lang=ff -script verdana/verdana.ff
+verdana_regular:
+	$(FONTFORGE) -lang=ff -script verdana/verdana-regular.ff
+verdana_italic:
+	$(FONTFORGE) -lang=ff -script verdana/verdana-italic.ff
+verdana_bold:
+	$(FONTFORGE) -lang=ff -script verdana/verdana-bold.ff
+
+verdanaCopy: verdana_regular verdana_italic verdana_bold
 	@echo "verdana.ff end"
 
 woff: # ttf
